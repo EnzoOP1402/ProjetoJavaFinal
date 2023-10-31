@@ -41,9 +41,24 @@ public class ClienteController {
         return clRep.findByEmail(email);
     }
 
-    @GetMapping("/buscarNomeEmail/{nomeEmail}")
-    public List<Cliente> buscarNomeEmail(@PathVariable("nomeEmail") String nomeEmail){
-        return clRep.findByNomeEmail(nomeEmail);
+    @GetMapping("/buscarNomeEmail/{nome}/{email}")
+    public List<Cliente> buscarNomeEmail(@PathVariable("nome") String nome,@PathVariable("email") String email){
+        return clRep.findByNomeEmail(nome, email);
+    }
+
+    @DeleteMapping("/excluirClienteTodosDados")
+    public void excluirCliente(@RequestBody Cliente cl){
+        clRep.delete(cl);
+    }
+
+    @DeleteMapping("/excluirClienteCodigo/{codigo}")
+    public void excluirClienteCodigo(@PathVariable("codigo") int codigo){
+        clRep.deleteById(codigo);
+    }
+
+    @PutMapping("/atualizarCliente")
+    public void atualizarCliente(@RequestBody Cliente cl){
+        clRep.save(cl);
     }
 
 }

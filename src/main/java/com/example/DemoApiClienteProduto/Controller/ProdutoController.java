@@ -14,25 +14,40 @@ import java.util.Optional;
 public class ProdutoController {
 
     @Autowired
-    ProdutoRepository ProdRep;
+    ProdutoRepository prRep;
 
     @PostMapping("/inserirProduto")
     public void cadastrarProduto(@RequestBody Produto p){
-        ProdRep.save(p);
+        prRep.save(p);
     }
 
     @GetMapping("/todos")
     public List<Produto> buscarTodosProdutos(){
-        return ProdRep.findAll();
+        return prRep.findAll();
     }
 
-    @GetMapping("/bucarPorRa/{codigo}")
+    @GetMapping("/buscarPorCodigo/{codigo}")
     public Optional<Produto> buscarPorCodigo(@PathVariable("codigo")int codigo){
-        return ProdRep.findById(codigo);
+        return prRep.findById(codigo);
     }
 
     @GetMapping("/buscarParteInicialDesc/{desc}")
     public List<Produto> buscarPorParteIniDesc(@PathVariable("desc") String desc){
-        return ProdRep.findByParteInicialDesc(desc);
+        return prRep.findByParteInicialDesc(desc);
+    }
+
+    @DeleteMapping("/excluirProdutoTodosDados")
+    public void excluirProduto(@RequestBody Produto p){
+        prRep.delete(p);
+    }
+
+    @DeleteMapping("/excluirProdutoCodigo/{codigo}")
+    public void excluirProdutoCodigo(@PathVariable("codigo") int codigo){
+        prRep.deleteById(codigo);
+    }
+
+    @PutMapping("/atualizarProduto")
+    public void atualizarProduto(@RequestBody Produto p){
+        prRep.save(p);
     }
 }

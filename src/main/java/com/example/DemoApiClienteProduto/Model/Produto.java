@@ -3,8 +3,10 @@ package com.example.DemoApiClienteProduto.Model;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
-@Entity (name = "IntelliJ_Produto_SpringBoot")
+@Entity
+@Table (name = "IntelliJ_Produto_SpringBoot")
 public class Produto {
 
     @Id
@@ -18,6 +20,7 @@ public class Produto {
 
     @Column
     private double preco;
+
 
     public int getCodigo() {
         return codigo;
